@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All" type="CompoundRunConfigurationType">
+    <toRun name="stravaFetch" type="MicronautRunConfigurationType" />
+    <toRun name="stravaStore" type="MicronautRunConfigurationType" />
+    <toRun name="stravaView" type="MicronautRunConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>

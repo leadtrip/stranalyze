@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  strava-db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=stravastore
+      - MYSQL_PASSWORD=stravastore
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true

@@ -1,0 +1,33 @@
+micronaut:
+  application:
+    name: stravastore
+  server:
+    port: 10051
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/db
+    username: stravastore
+    password: stravastore
+    dialect: MYSQL
+    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+#    username: sa
+#    password: ''
+#    driver-class-name: org.h2.Driver
+#    dialect: H2
+flyway:
+  datasources:
+    default:
+      enabled: true
+#consul:
+#  client:
+#    defaultZone: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}
+#    registration:
+#      enabled: false
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+strava:
+  maxPerPage: 30

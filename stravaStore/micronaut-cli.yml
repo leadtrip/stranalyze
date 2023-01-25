@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: wood.mike
+testFramework: spock
+sourceLanguage: groovy
+buildTool: gradle
+features: [annotation-api, app-name, consul, data, data-jdbc, discovery-consul, flyway, gradle, groovy, groovy-application, h2, http-client, jackson-databind, jdbc-hikari, logback, micronaut-build, netty-server, readme, shade, spock, yaml]

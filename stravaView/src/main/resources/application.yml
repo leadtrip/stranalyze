@@ -1,0 +1,16 @@
+micronaut:
+  application:
+    name: stravaView
+  server:
+    port: 10052
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/public/**"
+        paths: "classpath:public"
+
+netty:
+  default:
+    allocator:
+      max-order: 3

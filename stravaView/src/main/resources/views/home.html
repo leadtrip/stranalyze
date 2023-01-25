@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>StravaView - home</title>
+</head>
+<body>
+
+<section>
+
+    <table class="table table-bordered table-striped" id="activityTable">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Started raw (not shown)</th>
+                <th>Started</th>
+                <th>Duration</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Avg Watts</th>
+                <th>Max Watts</th>
+                <th>Avg HR</th>
+                <th>Max HR</th>
+                <th>Suffer score</th>
+                <!--<th>Elevation gain meters (not shown)</th>-->
+                <th>Elevation gain</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="activity: ${activities}">
+                <td th:text="${activity.id}" />
+                <td th:text="${activity.start_date}" />
+                <td th:text="${#temporals.format(activity.start_date, 'dd-MMM-yyyy hh:mm:ss')}" />
+                <td th:text="${activity.elapsedToHoursMinutesSeconds()}" />
+                <td> <img th:src="@{${'/public/images/' + activity.sport_type + '.svg'}}" > </td>
+                <td th:text="${activity.name}" />
+                <td th:text="${#numbers.formatDecimal(activity.average_watts, 0, 0)}" />
+                <td th:text="${activity.max_watts}" />
+                <td th:text="${#numbers.formatDecimal(activity.average_heartrate, 0, 0)} ?: 0" />
+                <td th:text="${activity.max_heartrate} ?: 0" />
+                <td th:text="${activity.suffer_score} ?: 0" />
+                <td th:text="${activity.total_elevation_gain}" />
+                <!--<td th:text="${activity.elevationGainMetersAndFeet()}" />-->
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $( '#activityTable' ).DataTable({
+                'order' :  [ [0, 'desc'] ], /* Bracket spacing is required here to prevent Thymeleaf errors*/
+                "columnDefs": [
+                    {
+                        "orderData": [1], "targets": [2]
+                    },
+                    {
+                        "targets": [0,1],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ]
+            });
+        });
+    </script>
+
+</section>
+</body>
+</html>

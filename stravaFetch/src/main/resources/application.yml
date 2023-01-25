@@ -1,0 +1,14 @@
+micronaut:
+  application:
+    name: stravaFetch
+  server:
+    port: 10050
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+strava:
+  clientId: 2341
+  clientSecret: 573c851ca91d0b3d4c770b56aa828efcc63dbb87
+  refreshToken: 7e2e9ee4523737ece74c8989cca32abe67994d5b
