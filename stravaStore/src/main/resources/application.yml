@@ -31,3 +31,4 @@ netty:
 
 strava:
   maxPerPage: 30
+  emptyDbMonths: 3

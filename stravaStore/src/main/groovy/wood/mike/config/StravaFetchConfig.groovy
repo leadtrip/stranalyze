@@ -8,4 +8,5 @@ import io.micronaut.context.annotation.Requires
 class StravaFetchConfig {
     public static final String PREFIX = "strava"
     Integer maxPerPage
+    Integer emptyDbMonths
 }

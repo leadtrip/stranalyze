@@ -33,7 +33,7 @@ class DataLoadService {
 
         LocalDateTime lastActivityStart = maxId.isPresent()
                 ? activityRepository.findByStravaActivityId( maxId.get() ).get().startDate
-                : LocalDateTime.now().minusMonths(1)
+                : LocalDateTime.now().minusMonths(stravaFetchConfig.emptyDbMonths)
 
         log.info("Polling for activites created after ${lastActivityStart}")
 
@@ -47,5 +47,12 @@ class DataLoadService {
                 log.info("Adding activity " + activity.id);
                 activityRepository.persist(activity)
             }
+
+        // Load an empty database with some activities
+        if (!maxId.isPresent()) {
+            (stravaFetchConfig.emptyDbMonths * 2).times {
+                loadLatestActivites()
+            }
+        }
     }
 }
