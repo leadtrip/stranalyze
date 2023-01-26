@@ -12,6 +12,8 @@ import reactor.core.publisher.Mono
 import wood.mike.domain.Activity
 import wood.mike.domain.Athlete
 
+import javax.validation.constraints.NotNull
+
 import static io.micronaut.http.HttpHeaders.ACCEPT
 
 @Client('http://localhost:10050/stravaFetch')
@@ -27,4 +29,6 @@ interface StravaFetchClient {
     @Get('/activities')
     Flux<Activity> fetchActivities( @QueryValue @Nullable Integer page, @QueryValue(value = 'per_page') @Nullable Integer perPage )
 
+    @Get( uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM )
+    Flux<Activity> activitiesAfter( @QueryValue @NotNull  Long after )
 }

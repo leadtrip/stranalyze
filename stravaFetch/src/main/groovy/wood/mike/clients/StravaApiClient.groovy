@@ -12,6 +12,8 @@ import wood.mike.config.StravaApiConfig
 import wood.mike.model.Activity
 import wood.mike.model.Athlete
 
+import javax.validation.constraints.NotNull
+
 @Client(StravaApiConfig.STRAVA_API_URL)
 @StravaAuth
 interface StravaApiClient {
@@ -25,4 +27,6 @@ interface StravaApiClient {
     @Get('/activities')
     Flux<Activity> fetchActivities(@QueryValue @Nullable page, @QueryValue(value = 'per_page') @Nullable Integer perPage )
 
+    @Get( '/activities' )
+    Flux<Activity> activitesAfter( @QueryValue @NotNull Long after )
 }

@@ -43,4 +43,10 @@ class StravaApiController {
         logger.info("Fetching activities")
         stravaApiClient.fetchActivities(page, perPage)
     }
+
+    @Get(uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM)
+    Publisher<Activity> activitiesAfter(@QueryValue @Nullable Long after ) {
+        logger.info("Fetching activities after ${after}")
+        stravaApiClient.activitesAfter( after )
+    }
 }

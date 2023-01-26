@@ -18,4 +18,6 @@ interface ActivityRepository extends CrudRepository<Activity, Long> {
     List<Activity> findAllByStartDateAfter( LocalDateTime after )
 
     List<Activity> findAllBySportTypeIlike( String type )
+
+    Optional<Long> findMaxId()
 }
