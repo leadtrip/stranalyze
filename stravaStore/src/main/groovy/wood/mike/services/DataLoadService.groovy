@@ -10,6 +10,11 @@ import wood.mike.repositories.ActivityRepository
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
+/**
+ * Updates the database with new activities created after the current latest.
+ * If the database is empty it'll be populated with a configurable number of months worth of activities.
+ * Strava does offer a webhook which will inform of new activities but this requires a public facing URL.
+ */
 @Singleton
 @Slf4j
 class DataLoadService {
@@ -37,7 +42,9 @@ class DataLoadService {
 
         log.info("Polling for activites created after ${lastActivityStart}")
 
-        List<Activity> activities = stravaFetchClient.activitiesAfter( lastActivityStart.toEpochSecond(ZoneOffset.UTC) ).collectList().block()
+        List<Activity> activities = stravaFetchClient.activitiesAfter( lastActivityStart.toEpochSecond(ZoneOffset.UTC) )
+                .collectList()
+                .block()
 
         log.info("Got ${activities.size()} activities")
 
@@ -48,11 +55,9 @@ class DataLoadService {
                 activityRepository.persist(activity)
             }
 
-        // Load an empty database with some activities
-        if (!maxId.isPresent()) {
-            (stravaFetchConfig.emptyDbMonths * 2).times {
-                loadLatestActivites()
-            }
+        // Load an empty database with some activities and top up until latest is present
+        if (!maxId.isPresent() || activities.size() >= stravaFetchConfig.maxPerPage) {
+            loadLatestActivites()
         }
     }
 }
