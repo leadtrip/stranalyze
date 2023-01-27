@@ -1,8 +1,8 @@
 plugins {
     id("groovy")
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.7.0"
-    id("io.micronaut.test-resources") version "3.7.0"
+    id("com.github.johnrengelman.shadow")
+    id("io.micronaut.application")
+    id("io.micronaut.test-resources")
 }
 
 version = "0.1"
@@ -46,6 +46,9 @@ graalvmNative.toolchainDetection = false
 micronaut {
     runtime("netty")
     testRuntime("spock2")
+    testResources {
+        enabled = true
+    }
     processing {
         incremental(true)
         annotations("wood.mike.*")
