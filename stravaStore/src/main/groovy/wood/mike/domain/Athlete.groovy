@@ -13,7 +13,8 @@ import io.micronaut.serde.annotation.Serdeable
 class Athlete {
     @Id
     @GeneratedValue(GeneratedValue.Type.AUTO)
-    Long appId
+    @MappedProperty( value = 'athlete_id')
+    Long athleteId
     @MappedProperty( value = 'strava_athlete_id')
     Long id
     String firstname
