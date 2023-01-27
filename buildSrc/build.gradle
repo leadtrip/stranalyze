@@ -1,0 +1,10 @@
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
+    implementation "io.micronaut.gradle:micronaut-gradle-plugin:3.7.0"
+    implementation "io.micronaut.gradle:micronaut-test-resources-plugin:3.7.0"
+}
