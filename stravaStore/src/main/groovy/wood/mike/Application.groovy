@@ -1,5 +1,6 @@
 package wood.mike
 
+import io.micronaut.context.env.Environment
 import io.micronaut.runtime.Micronaut
 import groovy.transform.CompileStatic
 
@@ -7,6 +8,9 @@ import groovy.transform.CompileStatic
 class Application {
 
     static void main(String[] args) {
-        Micronaut.run(Application, args)
+        Micronaut.build(args)
+                .mainClass(Application.class)
+                .defaultEnvironments(Environment.DEVELOPMENT)
+                .start();
     }
 }
