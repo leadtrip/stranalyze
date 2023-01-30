@@ -23,16 +23,16 @@ import java.time.LocalDateTime
 
 @CompileStatic
 @Controller("/stravaStore")
-class StravaFetchController {
+class StravaStoreController {
 
-    private static Logger logger = LoggerFactory.getLogger(StravaFetchController.class);
+    private static Logger logger = LoggerFactory.getLogger(StravaStoreController.class);
 
     private final StravaFetchConfig stravaFetchConfig
     private final StravaFetchClient stravaFetchClient
     private final AthleteRepository athleteRepository
     private final ActivityRepository activityRepository
 
-    StravaFetchController(StravaFetchConfig conf,
+    StravaStoreController(StravaFetchConfig conf,
                           StravaFetchClient sfc,
                           AthleteRepository ar,
                           ActivityRepository actR) {

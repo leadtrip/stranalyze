@@ -16,13 +16,13 @@ import wood.mike.model.Athlete
 
 @CompileStatic
 @Controller("/stravaFetch")
-class StravaApiController {
+class StravaFetchController {
 
-    private static Logger logger = LoggerFactory.getLogger(StravaApiController.class);
+    private static Logger logger = LoggerFactory.getLogger(StravaFetchController.class);
 
     private final StravaApiClient stravaApiClient
 
-    StravaApiController(StravaApiClient sac) {
+    StravaFetchController(StravaApiClient sac) {
         this.stravaApiClient = sac
     }
 

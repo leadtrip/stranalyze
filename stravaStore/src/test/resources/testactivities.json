@@ -1,0 +1,210 @@
+[
+    {
+        "id": 8475249779,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Xert - Lucy in the sky 90",
+        "distance": 50486,
+        "moving_time": 5116,
+        "elapsed_time": 5116,
+        "total_elevation_gain": 192,
+        "sport_type": "VirtualRide",
+        "start_date": "2023-01-30T07:14:17Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 9.868,
+        "max_speed": 15,
+        "average_cadence": 98.5,
+        "average_watts": 210.6,
+        "weighted_average_watts": 212,
+        "kilojoules": 1077.5,
+        "average_heartrate": 144.5,
+        "max_heartrate": 160,
+        "max_watts": 242,
+        "suffer_score": 78
+    },{
+        "id": 8471505639,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Lunch Run",
+        "distance": 10108,
+        "moving_time": 3774,
+        "elapsed_time": 3827,
+        "total_elevation_gain": 31,
+        "sport_type": "Run",
+        "start_date": "2023-01-29T12:52:25Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 2.679,
+        "max_speed": 4,
+        "average_cadence": 85.6,
+        "average_heartrate": 140.6,
+        "max_heartrate": 170,
+        "suffer_score": 29
+    },{
+        "id": 8469157480,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Xert - threshold builder 2",
+        "distance": 47100,
+        "moving_time": 4688,
+        "elapsed_time": 4688,
+        "total_elevation_gain": 171,
+        "sport_type": "VirtualRide",
+        "start_date": "2023-01-29T06:34:11Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 10.047,
+        "max_speed": 16,
+        "average_cadence": 95.4,
+        "average_watts": 218.6,
+        "weighted_average_watts": 226,
+        "kilojoules": 1024.9,
+        "average_heartrate": 145.8,
+        "max_heartrate": 161,
+        "max_watts": 254,
+        "suffer_score": 81
+    },{
+        "id": 8463824204,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Morning Weight Training",
+        "distance": 0,
+        "moving_time": 2759,
+        "elapsed_time": 2759,
+        "total_elevation_gain": 0,
+        "sport_type": "WeightTraining",
+        "start_date": "2023-01-28T08:44:52Z",
+        "timezone": "(GMT+00:00) Atlantic/St_Helena",
+        "average_speed": 0.0,
+        "max_speed": 0,
+        "average_heartrate": 109.3,
+        "max_heartrate": 139,
+        "suffer_score": 8
+    },{
+        "id": 8463397544,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Xert - threshold builder 5",
+        "distance": 48633,
+        "moving_time": 4700,
+        "elapsed_time": 4700,
+        "total_elevation_gain": 140,
+        "sport_type": "VirtualRide",
+        "start_date": "2023-01-28T06:16:46Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 10.348,
+        "max_speed": 15,
+        "average_cadence": 94.9,
+        "average_watts": 224.3,
+        "weighted_average_watts": 233,
+        "kilojoules": 1054.4,
+        "average_heartrate": 146.1,
+        "max_heartrate": 163,
+        "max_watts": 265,
+        "suffer_score": 83
+    },{
+        "id": 8458780178,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Morning Weight Training",
+        "distance": 0,
+        "moving_time": 2680,
+        "elapsed_time": 2680,
+        "total_elevation_gain": 0,
+        "sport_type": "WeightTraining",
+        "start_date": "2023-01-27T07:03:11Z",
+        "timezone": "(GMT+00:00) GMT0",
+        "average_speed": 0.0,
+        "max_speed": 0,
+        "average_heartrate": 98.6,
+        "max_heartrate": 124,
+        "suffer_score": 6
+    },{
+        "id": 8455841466,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Afternoon Run",
+        "distance": 5243,
+        "moving_time": 1730,
+        "elapsed_time": 1730,
+        "total_elevation_gain": 17,
+        "sport_type": "Run",
+        "start_date": "2023-01-26T16:39:38Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 3.031,
+        "max_speed": 4,
+        "average_cadence": 85.7,
+        "average_heartrate": 146.0,
+        "max_heartrate": 162,
+        "suffer_score": 26
+    },{
+        "id": 8453473847,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Xert - Lucy in the sky 90",
+        "distance": 54619,
+        "moving_time": 5405,
+        "elapsed_time": 5405,
+        "total_elevation_gain": 166,
+        "sport_type": "VirtualRide",
+        "start_date": "2023-01-26T05:48:47Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 10.105,
+        "max_speed": 16,
+        "average_cadence": 94.1,
+        "average_watts": 213.5,
+        "weighted_average_watts": 217,
+        "kilojoules": 1153.8,
+        "average_heartrate": 138.8,
+        "max_heartrate": 160,
+        "max_watts": 249,
+        "suffer_score": 72
+    },{
+        "id": 8448831805,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Zwift - Tick Tock in Watopia",
+        "distance": 27005,
+        "moving_time": 2673,
+        "elapsed_time": 2673,
+        "total_elevation_gain": 72,
+        "sport_type": "VirtualRide",
+        "start_date": "2023-01-25T10:18:40Z",
+        "timezone": "(GMT+00:00) Europe/London",
+        "average_speed": 10.103,
+        "max_speed": 16,
+        "average_cadence": 97.7,
+        "average_watts": 211.6,
+        "weighted_average_watts": 220,
+        "kilojoules": 565.7,
+        "average_heartrate": 140.0,
+        "max_heartrate": 171,
+        "max_watts": 303,
+        "suffer_score": 34
+    },{
+        "id": 8448222055,
+        "athlete": {
+            "id": 1955111
+        },
+        "name": "Morning Weight Training",
+        "distance": 0,
+        "moving_time": 2185,
+        "elapsed_time": 2185,
+        "total_elevation_gain": 0,
+        "sport_type": "WeightTraining",
+        "start_date": "2023-01-25T07:03:06Z",
+        "timezone": "(GMT+00:00) GMT",
+        "average_speed": 0.0,
+        "max_speed": 0,
+        "average_heartrate": 93.3,
+        "max_heartrate": 138,
+        "suffer_score": 4
+    }
+]
