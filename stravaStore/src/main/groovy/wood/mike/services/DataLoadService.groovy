@@ -1,6 +1,7 @@
 package wood.mike.services
 
 import groovy.util.logging.Slf4j
+import io.micronaut.context.annotation.Requires
 import jakarta.inject.Singleton
 import wood.mike.clients.StravaFetchClient
 import wood.mike.config.StravaFetchConfig
@@ -17,6 +18,7 @@ import java.time.ZoneOffset
  */
 @Singleton
 @Slf4j
+@Requires(notEnv="test")
 class DataLoadService {
 
     private final StravaFetchConfig stravaFetchConfig

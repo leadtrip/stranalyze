@@ -20,6 +20,9 @@ import wood.mike.domain.Athlete
 import wood.mike.repositories.ActivityRepository
 import wood.mike.repositories.AthleteRepository
 
+import java.time.LocalDateTime
+import java.time.Month
+
 @MicronautTest
 class StravaStoreControllerSpec extends Specification{
 
@@ -53,6 +56,8 @@ class StravaStoreControllerSpec extends Specification{
     @Value("classpath:testactivities.json")
     Readable readable
 
+    static final ACTIVITY_8455841466 = '8455841466'
+
     void "test fetchAthlete" () {
         when:
             client.toBlocking().exchange(HttpRequest.GET('/stravaStore/athlete'))
@@ -81,6 +86,25 @@ class StravaStoreControllerSpec extends Specification{
             def response = client.jsonStream( request, Activity ).collectList().block()
         then:
             response.size() == 5
+        when:
+            LocalDateTime after = LocalDateTime.of(2023, Month.JANUARY, 27, 0, 0, 0)
+            URI activitiesAfterUri = UriBuilder.of('/stravaStore').path('activitiesAfter').queryParam( 'after', after ).build()
+            request = HttpRequest.GET( activitiesAfterUri.toString() )
+            response = client.jsonStream( request, Activity ).collectList().block()
+        then:
+            response.size() == 6
+        when:
+            URI singleActivityUri = UriBuilder.of('/stravaStore').path('activity').path( ACTIVITY_8455841466 ).build()
+            request = HttpRequest.GET( singleActivityUri.toString() )
+            response = client.jsonStream( request, Activity ).blockFirst()
+        then:
+            response.name == 'Afternoon Run'
+            response.distance == 5243
+        when:
+            request = HttpRequest.GET('/stravaStore/activities')
+            response = client.jsonStream( request, Activity ).collectList().block()
+        then:
+            response.size() == mockActivities.size()
     }
 
     def activityList() {
