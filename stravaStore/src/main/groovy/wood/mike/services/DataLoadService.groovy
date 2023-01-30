@@ -1,7 +1,6 @@
 package wood.mike.services
 
 import groovy.util.logging.Slf4j
-import io.micronaut.context.annotation.Requires
 import jakarta.inject.Singleton
 import wood.mike.clients.StravaFetchClient
 import wood.mike.config.StravaFetchConfig
@@ -14,11 +13,9 @@ import java.time.ZoneOffset
 /**
  * Updates the database with new activities created after the current latest.
  * If the database is empty it'll be populated with a configurable number of months worth of activities.
- * Strava does offer a webhook which will inform of new activities but this requires a public facing URL.
  */
 @Singleton
 @Slf4j
-@Requires(notEnv="test")
 class DataLoadService {
 
     private final StravaFetchConfig stravaFetchConfig
