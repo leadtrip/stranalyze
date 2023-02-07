@@ -3,6 +3,15 @@ micronaut:
     name: stravastore
   server:
     port: 10051
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        enabled: true
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
 
 flyway:
   datasources:
