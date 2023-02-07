@@ -57,6 +57,8 @@ micronaut {
     }
 }
 
+// following was needed to get swagger-ui files generated when booting app, adding an openapi.properties file with the same
+// properties set would generate the files with gradle assemble but they were deleted or not generated when running the app
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
     groovyOptions.forkOptions.jvmArgs.add('-Dmicronaut.openapi.views.spec=rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop')
