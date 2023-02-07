@@ -116,4 +116,15 @@ class StravaStoreController {
                 })
     }
 
+    /**
+     * @param activityId    - the activity ID
+     * @return a text based activity summary response
+     */
+    @Get(uri = '/activitySummary/{activityId}', produces = MediaType.TEXT_PLAIN )
+    Mono<String> activitySummary( @PathVariable String activityId ) {
+        Mono.justOrEmpty( activityRepository.findByStravaActivityId(activityId as Long) )
+            .flatMap( activity ->
+                    Mono.just( "ID=${activity.id}, name=${activity.name}, distance=${activity.distance}, started=${activity.startDate}, duration=${activity.elapsed_time}".toString() ) )
+        .switchIfEmpty( Mono.just( "Activity ID ${activityId} not found".toString() ) )
+    }
 }
