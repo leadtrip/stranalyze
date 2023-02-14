@@ -128,7 +128,7 @@ class StravaStoreController {
     Mono<String> activitySummary( @PathVariable String activityId ) {
         Mono.justOrEmpty( activityRepository.findByStravaActivityId(activityId as Long) )
             .flatMap( activity ->
-                    Mono.just( "ID=${activity.id}, name=${activity.name}, distance=${activity.distance}, started=${activity.startDate}, duration=${activity.elapsed_time}".toString() ) )
+                    Mono.just( activityMinimal(activity) ) )
         .switchIfEmpty( Mono.just( "Activity ID ${activityId} not found".toString() ) )
     }
 
@@ -153,6 +153,10 @@ class StravaStoreController {
         Mono.just(activityRepository.count())
     }
 
+    /**
+     * @param activity  - the activity
+     * @return a summarized version of the activity
+     */
     String activityMinimal( Activity activity ) {
         objectMapper.writeValueAsString([ID: activity.id, name: activity.name, distance: activity.distance, started: activity.startDate, duration: activity.elapsed_time])
     }
