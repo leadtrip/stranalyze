@@ -1,6 +1,6 @@
-!**/build
-!**/.idea
-!**/.gradle
-!**/target
-!**/out
-!**/.micronaut
+**/build
+**/.idea
+**/.gradle
+**/target
+**/out
+**/.micronaut
