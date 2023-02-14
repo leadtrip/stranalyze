@@ -33,7 +33,3 @@ strava:
 #    defaultZone: ${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}
 #    registration:
 #      enabled: false
-
-jackson:
-  serialization:
-    indent-output: true
