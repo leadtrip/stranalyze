@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/stranalyze.iml" filepath="$PROJECT_DIR$/stranalyze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stravaCli/stranalyze.stravaCli.iml" filepath="$PROJECT_DIR$/.idea/modules/stravaCli/stranalyze.stravaCli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stravaFetch/stranalyze.stravaFetch.iml" filepath="$PROJECT_DIR$/.idea/modules/stravaFetch/stranalyze.stravaFetch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stravaStore/stranalyze.stravaStore.iml" filepath="$PROJECT_DIR$/.idea/modules/stravaStore/stranalyze.stravaStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stravaStore/stranalyze.stravaStore.test.iml" filepath="$PROJECT_DIR$/.idea/modules/stravaStore/stranalyze.stravaStore.test.iml" />
+    </modules>
+  </component>
+</project>
