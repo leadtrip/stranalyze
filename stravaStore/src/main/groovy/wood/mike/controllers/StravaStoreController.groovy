@@ -7,6 +7,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.QueryValue
+import io.micronaut.serde.ObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import reactor.core.publisher.Flux
@@ -31,15 +32,18 @@ class StravaStoreController {
     private final StravaFetchClient stravaFetchClient
     private final AthleteRepository athleteRepository
     private final ActivityRepository activityRepository
+    private final ObjectMapper objectMapper
 
     StravaStoreController(StravaFetchConfig conf,
                           StravaFetchClient sfc,
                           AthleteRepository ar,
-                          ActivityRepository actR) {
+                          ActivityRepository actR,
+                          ObjectMapper om) {
         this.stravaFetchConfig = conf
         this.stravaFetchClient = sfc
         this.athleteRepository = ar
         this.activityRepository = actR
+        this.objectMapper = om
     }
 
     /**
@@ -126,5 +130,30 @@ class StravaStoreController {
             .flatMap( activity ->
                     Mono.just( "ID=${activity.id}, name=${activity.name}, distance=${activity.distance}, started=${activity.startDate}, duration=${activity.elapsed_time}".toString() ) )
         .switchIfEmpty( Mono.just( "Activity ID ${activityId} not found".toString() ) )
+    }
+
+    /**
+     * @return a summarized version of the latest activity
+     */
+    @Get(uri = '/latestActivity', produces = MediaType.TEXT_PLAIN )
+    Mono<String> latestActivity() {
+        logger.info("Getting latest activity")
+        Mono.justOrEmpty( activityRepository.findLatestActivity() )
+                .flatMap( activity ->
+                        Mono.just( activityMinimal( activity ) ) )
+                .switchIfEmpty( Mono.just( "No activities found" ) )
+    }
+
+    /**
+     * @return count of all activities
+     */
+    @Get(uri = '/activityCount', produces = MediaType.TEXT_PLAIN )
+    Mono<Long> activityCount() {
+        logger.info("Getting activity count")
+        Mono.just(activityRepository.count())
+    }
+
+    String activityMinimal( Activity activity ) {
+        objectMapper.writeValueAsString([ID: activity.id, name: activity.name, distance: activity.distance, started: activity.startDate, duration: activity.elapsed_time])
     }
 }

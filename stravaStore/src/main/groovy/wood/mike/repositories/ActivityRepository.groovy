@@ -20,4 +20,7 @@ interface ActivityRepository extends CrudRepository<Activity, Long> {
     List<Activity> findAllBySportTypeIlike( String type )
 
     Optional<Long> findMaxId()
+
+    @Query('select * from activity where strava_activity_id = (select max(strava_activity_id) from activity)')
+    Optional<Activity> findLatestActivity()
 }
