@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono
 import wood.mike.clients.StravaFetchClient
 import wood.mike.config.StravaFetchConfig
 import wood.mike.domain.Activity
+import wood.mike.domain.ActivitySummary
 import wood.mike.domain.Athlete
 import wood.mike.repositories.ActivityRepository
 import wood.mike.repositories.AthleteRepository
@@ -158,6 +159,6 @@ class StravaStoreController {
      * @return a summarized version of the activity
      */
     String activityMinimal( Activity activity ) {
-        objectMapper.writeValueAsString([ID: activity.id, name: activity.name, distance: activity.distance, started: activity.startDate, duration: activity.elapsed_time])
+        objectMapper.writeValueAsString( new ActivitySummary(activity) )
     }
 }

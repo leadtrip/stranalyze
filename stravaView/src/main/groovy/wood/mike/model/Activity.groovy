@@ -34,13 +34,6 @@ class Activity {
     Integer max_watts
     Integer suffer_score
 
-    def elapsedToHoursMinutesSeconds() {
-        def hours = elapsed_time / 3600
-        def minutes = (elapsed_time % 3600) / 60
-        def seconds = elapsed_time % 60
-        String.format("%02d:%02d:%02d", hours.longValue(), minutes.longValue(), seconds.longValue())
-    }
-
     def elevationGainMetersAndFeet() {
         "$total_elevation_gain (${(total_elevation_gain * 3.281).round()})"
     }
