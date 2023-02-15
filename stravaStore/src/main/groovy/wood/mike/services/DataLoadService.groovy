@@ -5,7 +5,6 @@ import jakarta.inject.Singleton
 import wood.mike.ActivityDto
 import wood.mike.clients.StravaFetchClient
 import wood.mike.config.StravaFetchConfig
-import wood.mike.domain.ActivityEntity
 import wood.mike.repositories.ActivityRepository
 
 import java.time.LocalDateTime

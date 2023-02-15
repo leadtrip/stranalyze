@@ -30,12 +30,10 @@ class ActivityEntity {
     Long total_elevation_gain
 
     @MappedProperty( value = 'sport_type')
-    //@JsonProperty("sport_type")
     String sportType
 
     @MappedProperty( value = 'start_date')
     @Format("yyyy-MM-ddThh:mm:ssZ")
-    //@JsonProperty("start_date")
     LocalDateTime startDate
 
     String timezone

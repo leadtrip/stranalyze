@@ -5,17 +5,15 @@ import picocli.CommandLine
 import reactor.core.publisher.Mono
 import wood.mike.activity.clients.StoreClient
 
-import java.time.Duration
-
-@CommandLine.Command(name = 'count')
-final class ActivityCountCommand implements Runnable {
+@CommandLine.Command(name = 'load')
+final class LoadLatestActivitiesCommand implements Runnable {
 
     @Inject
     StoreClient client
 
     @Override
     void run() {
-        client.activityCount()
+        client.loadLatestActivites()
                 .doOnSuccess(System.out::println)
                 .doOnError( ex -> println "Error: ${ex.message}" )
                 .onErrorResume(ex-> Mono.empty())

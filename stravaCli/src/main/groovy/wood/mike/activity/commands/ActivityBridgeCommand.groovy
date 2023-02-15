@@ -7,7 +7,8 @@ import picocli.CommandLine
         description = "Strava activity related.",
         subcommands = [
             ActivityCountCommand.class,
-            LatestActivityCommand.class
+            LatestActivityCommand.class,
+            LoadLatestActivitiesCommand.class
         ])
 class ActivityBridgeCommand {
 }

@@ -18,4 +18,8 @@ public interface StoreClient {
     @Header(name = ACCEPT, value = MediaType.TEXT_PLAIN )
     @Get( '/latestActivity' )
     Mono<String> latestActivity()
+
+    @Header(name = ACCEPT, value = MediaType.TEXT_PLAIN )
+    @Get( '/loadLatestActivites' )
+    Mono<Long> loadLatestActivites()
 }

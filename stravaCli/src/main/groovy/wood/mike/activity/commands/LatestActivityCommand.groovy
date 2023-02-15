@@ -20,6 +20,6 @@ class LatestActivityCommand extends AbstractCliCommand implements Runnable {
                 .doOnSuccess( resp -> prettyPrintJsonResponse(resp))
                 .doOnError( ex -> println "Error: ${ex.message}" )
                 .onErrorResume(ex-> Mono.empty())
-                .block(Duration.ofSeconds(3))
+                .block()
     }
 }

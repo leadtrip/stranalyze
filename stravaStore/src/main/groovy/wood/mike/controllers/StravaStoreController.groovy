@@ -27,8 +27,7 @@ class StravaStoreController {
     private final ActivityService activityService
     private final AthleteService athleteService
 
-
-    StravaStoreController(ActivityService acs, AthleteService athleteService) {
+    StravaStoreController(ActivityService acs, AthleteService athleteService ) {
         this.activityService = acs
         this.athleteService = athleteService
     }
@@ -117,4 +116,9 @@ class StravaStoreController {
         activityService.activityCount()
     }
 
+    @Get(uri = '/loadLatestActivites', produces = MediaType.TEXT_PLAIN)
+    Mono<Long> loadLatestActivites() {
+        logger.info("Loading latest activities")
+        activityService.loadLatestActivities()
+    }
 }
