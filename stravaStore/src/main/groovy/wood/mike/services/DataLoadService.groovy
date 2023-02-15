@@ -2,9 +2,10 @@ package wood.mike.services
 
 import groovy.util.logging.Slf4j
 import jakarta.inject.Singleton
+import wood.mike.ActivityDto
 import wood.mike.clients.StravaFetchClient
 import wood.mike.config.StravaFetchConfig
-import wood.mike.domain.Activity
+import wood.mike.domain.ActivityEntity
 import wood.mike.repositories.ActivityRepository
 
 import java.time.LocalDateTime
@@ -41,7 +42,7 @@ class DataLoadService {
 
         log.info("Polling for activites created after ${lastActivityStart}")
 
-        List<Activity> activities = stravaFetchClient.activitiesAfter( lastActivityStart.toEpochSecond(ZoneOffset.UTC) )
+        List<ActivityDto> activities = stravaFetchClient.activitiesAfter( lastActivityStart.toEpochSecond(ZoneOffset.UTC) )
                 .collectList()
                 .block()
 
@@ -51,7 +52,7 @@ class DataLoadService {
             .findAll{ activity -> !activityRepository.findByStravaActivityId(activity.id).isPresent() }
             .each {activity ->
                 log.info("Adding activity " + activity.id);
-                activityRepository.persist(activity)
+                activityRepository.persist(ActivityTransformer.to(activity))
             }
 
         // Load an empty database with some activities and top up until latest is present

@@ -13,7 +13,7 @@ class ActivitySummary {
     String startDate
     String duration
 
-    ActivitySummary( Activity activity ) {
+    ActivitySummary(ActivityEntity activity ) {
         this.id = activity.id
         this.name = activity.name
         this.startDate = activity.startDate.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))

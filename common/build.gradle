@@ -1,6 +1,6 @@
 plugins {
     id 'groovy'
-    id("io.micronaut.application")
+    id("io.micronaut.library")
 }
 
 group 'wood.mike'
@@ -11,11 +11,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.groovy:groovy:4.0.2'
+    implementation 'org.codehaus.groovy:groovy:3.0.13'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     compileOnly("io.micronaut.serde:micronaut-serde-api")
-    implementation("io.micronaut.serde:micronaut-serde-processor")
 }
 
 test {

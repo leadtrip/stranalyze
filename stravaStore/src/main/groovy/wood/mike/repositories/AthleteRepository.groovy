@@ -3,11 +3,11 @@ package wood.mike.repositories
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
-import wood.mike.domain.Athlete
+import wood.mike.domain.AthleteEntity
 
 @JdbcRepository(dialect = Dialect.MYSQL)
-interface AthleteRepository extends CrudRepository<Athlete, Long> {
-    Athlete persist(Athlete athlete)
+interface AthleteRepository extends CrudRepository<AthleteEntity, Long> {
+    AthleteEntity persist(AthleteEntity athlete)
 
-    Optional<Athlete> find()
+    Optional<AthleteEntity> find()
 }

@@ -10,7 +10,7 @@ import jakarta.inject.Inject
 import reactor.core.publisher.Flux
 import spock.lang.Specification
 import wood.mike.clients.StravaFetchClient
-import wood.mike.domain.Activity
+import wood.mike.domain.ActivityEntity
 import wood.mike.repositories.ActivityRepository
 
 @MicronautTest
@@ -33,7 +33,7 @@ class DataLoadServiceSpec extends Specification {
 
     void "test loadLatestActivites"() {
         given:
-            def aList =  objectMapper.readValue( readable.asInputStream(), Argument.listOf(Activity.class) )
+            def aList =  objectMapper.readValue( readable.asInputStream(), Argument.listOf(ActivityEntity.class) )
         when:
             dataLoadService.loadLatestActivites()
         then:

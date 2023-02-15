@@ -33,6 +33,8 @@ dependencies {
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     compileOnly("io.micronaut.openapi:micronaut-openapi")
     implementation("io.swagger.core.v3:swagger-annotations")
+
+    implementation(project(':common'))
 }
 
 

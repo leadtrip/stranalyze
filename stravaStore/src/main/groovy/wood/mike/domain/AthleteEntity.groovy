@@ -9,8 +9,8 @@ import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
 @CompileStatic
-@MappedEntity
-class Athlete {
+@MappedEntity('athlete')
+class AthleteEntity {
     @Id
     @GeneratedValue(GeneratedValue.Type.AUTO)
     @MappedProperty( value = 'athlete_id')

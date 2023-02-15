@@ -15,8 +15,8 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import spock.lang.Specification
 import wood.mike.clients.StravaFetchClient
-import wood.mike.domain.Activity
-import wood.mike.domain.Athlete
+import wood.mike.domain.ActivityEntity
+import wood.mike.domain.AthleteEntity
 import wood.mike.repositories.ActivityRepository
 import wood.mike.repositories.AthleteRepository
 
@@ -62,7 +62,7 @@ class StravaStoreControllerSpec extends Specification{
         when:
             client.toBlocking().exchange(HttpRequest.GET('/stravaStore/athlete'))
         then:
-            stravaFetchClient.fetchAthlete() >> Mono.just( objectMapper.readValue(ATHLETE_STRING, Athlete) )
+            stravaFetchClient.fetchAthlete() >> Mono.just( objectMapper.readValue(ATHLETE_STRING, AthleteEntity) )
         and:
             def athleteFromDb = athleteRepository.find()
             athleteFromDb.isPresent()
@@ -72,7 +72,7 @@ class StravaStoreControllerSpec extends Specification{
     void "test activity operations" () {
         given:
             readable.exists()
-            List<Activity> mockActivities = activityList()
+            List<ActivityEntity> mockActivities = activityList()
             HttpRequest<?> request = HttpRequest.GET('/stravaStore/bulkloadactivities/1')
         when:
             client.toBlocking().exchange(request)
@@ -83,32 +83,32 @@ class StravaStoreControllerSpec extends Specification{
         when:
             URI sportTypeUri = UriBuilder.of("/stravaStore").path('activitiesForSportType' ).queryParam('sportType', 'VirtualRide').build()
             request = HttpRequest.GET(sportTypeUri.toString())
-            def response = client.jsonStream( request, Activity ).collectList().block()
+            def response = client.jsonStream( request, ActivityEntity ).collectList().block()
         then:
             response.size() == 5
         when:
             LocalDateTime after = LocalDateTime.of(2023, Month.JANUARY, 27, 0, 0, 0)
             URI activitiesAfterUri = UriBuilder.of('/stravaStore').path('activitiesAfter').queryParam( 'after', after ).build()
             request = HttpRequest.GET( activitiesAfterUri.toString() )
-            response = client.jsonStream( request, Activity ).collectList().block()
+            response = client.jsonStream( request, ActivityEntity ).collectList().block()
         then:
             response.size() == 6
         when:
             URI singleActivityUri = UriBuilder.of('/stravaStore').path('activity').path( ACTIVITY_8455841466 ).build()
             request = HttpRequest.GET( singleActivityUri.toString() )
-            response = client.jsonStream( request, Activity ).blockFirst()
+            response = client.jsonStream( request, ActivityEntity ).blockFirst()
         then:
             response.name == 'Afternoon Run'
             response.distance == 5243
         when:
             request = HttpRequest.GET('/stravaStore/activities')
-            response = client.jsonStream( request, Activity ).collectList().block()
+            response = client.jsonStream( request, ActivityEntity ).collectList().block()
         then:
             response.size() == mockActivities.size()
     }
 
     def activityList() {
-        objectMapper.readValue( readable.asInputStream(), Argument.listOf(Activity.class) )
+        objectMapper.readValue( readable.asInputStream(), Argument.listOf(ActivityEntity.class) )
     }
 
     @MockBean(StravaFetchClient)

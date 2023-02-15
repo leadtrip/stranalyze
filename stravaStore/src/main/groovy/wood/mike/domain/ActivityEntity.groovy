@@ -13,8 +13,8 @@ import java.time.LocalDateTime
 
 @Serdeable
 @CompileStatic
-@MappedEntity
-class Activity {
+@MappedEntity('activity')
+class ActivityEntity {
 
     @Id
     @GeneratedValue(GeneratedValue.Type.AUTO)
@@ -22,9 +22,7 @@ class Activity {
     Long activityId
     @MappedProperty( value = 'strava_activity_id')
     Long id
-    //@JsonProperty("athleteid")
-    //@MappedProperty( converterPersistedType = Long, value = 'athlete_id' )
-    Athlete athlete
+    AthleteEntity athlete
     String name
     Long distance
     Long moving_time
@@ -32,12 +30,12 @@ class Activity {
     Long total_elevation_gain
 
     @MappedProperty( value = 'sport_type')
-    @JsonProperty("sport_type")
+    //@JsonProperty("sport_type")
     String sportType
 
     @MappedProperty( value = 'start_date')
     @Format("yyyy-MM-ddThh:mm:ssZ")
-    @JsonProperty("start_date")
+    //@JsonProperty("start_date")
     LocalDateTime startDate
 
     String timezone

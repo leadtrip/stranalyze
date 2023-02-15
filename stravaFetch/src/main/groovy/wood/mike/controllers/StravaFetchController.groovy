@@ -10,9 +10,9 @@ import io.micronaut.http.annotation.QueryValue
 import org.reactivestreams.Publisher
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import wood.mike.ActivityDto
+import wood.mike.AthleteDto
 import wood.mike.clients.StravaApiClient
-import wood.mike.model.Activity
-import wood.mike.model.Athlete
 
 @CompileStatic
 @Controller("/stravaFetch")
@@ -27,26 +27,27 @@ class StravaFetchController {
     }
 
     @Get(uri = "/athlete", produces = MediaType.APPLICATION_JSON_STREAM)
-    Publisher<Athlete> fetchAthlete() {
+    Publisher<AthleteDto> fetchAthlete() {
         logger.info("Fetching athlete")
         stravaApiClient.fetchAthlete()
     }
 
     @Get(uri = "/activity/{activityId}", produces = MediaType.APPLICATION_JSON_STREAM)
-    Publisher<Activity> fetchActivity(@PathVariable String activityId) {
+    Publisher<ActivityDto> fetchActivity(@PathVariable String activityId) {
         logger.info("Fetching activity ${activityId}")
         stravaApiClient.fetchActivity(activityId)
     }
 
     @Get(uri = "/activities", produces = MediaType.APPLICATION_JSON_STREAM)
-    Publisher<Activity> getActivities(@QueryValue @Nullable page, @QueryValue(value = 'per_page') @Nullable Integer perPage ) {
+    Publisher<ActivityDto> getActivities(@QueryValue @Nullable Integer page, @QueryValue(value = 'per_page') @Nullable Integer perPage ) {
         logger.info("Fetching activities")
         stravaApiClient.fetchActivities(page, perPage)
     }
 
     @Get(uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM)
-    Publisher<Activity> activitiesAfter(@QueryValue @Nullable Long after ) {
+    Publisher<ActivityDto> activitiesAfter(@QueryValue @Nullable Long after ) {
         logger.info("Fetching activities after ${after}")
         stravaApiClient.activitesAfter( after )
     }
+
 }

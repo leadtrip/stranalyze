@@ -7,10 +7,10 @@ import io.micronaut.http.annotation.QueryValue
 import io.micronaut.http.client.annotation.Client
 import org.reactivestreams.Publisher
 import reactor.core.publisher.Flux
+import wood.mike.ActivityDto
+import wood.mike.AthleteDto
 import wood.mike.annotations.StravaAuth
 import wood.mike.config.StravaApiConfig
-import wood.mike.model.Activity
-import wood.mike.model.Athlete
 
 import javax.validation.constraints.NotNull
 
@@ -19,14 +19,14 @@ import javax.validation.constraints.NotNull
 interface StravaApiClient {
 
     @Get('/athlete')
-    Publisher<Athlete> fetchAthlete()
+    Publisher<AthleteDto> fetchAthlete()
 
     @Get('/activities/{activityId}')
-    Publisher<Activity> fetchActivity(@PathVariable @Nullable String activityId)
+    Publisher<ActivityDto> fetchActivity(@PathVariable @Nullable String activityId)
 
     @Get('/activities')
-    Flux<Activity> fetchActivities(@QueryValue @Nullable page, @QueryValue(value = 'per_page') @Nullable Integer perPage )
+    Flux<ActivityDto> fetchActivities(@QueryValue @Nullable Integer page, @QueryValue(value = 'per_page') @Nullable Integer perPage )
 
     @Get( '/activities' )
-    Flux<Activity> activitesAfter( @QueryValue @NotNull Long after )
+    Flux<ActivityDto> activitesAfter( @QueryValue @NotNull Long after )
 }
