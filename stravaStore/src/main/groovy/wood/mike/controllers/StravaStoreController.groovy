@@ -1,28 +1,19 @@
 package wood.mike.controllers
 
 import groovy.transform.CompileStatic
-import io.micronaut.data.exceptions.DataAccessException
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.QueryValue
-import io.micronaut.serde.ObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import wood.mike.ActivityDto
 import wood.mike.AthleteDto
-import wood.mike.clients.StravaFetchClient
-import wood.mike.config.StravaFetchConfig
-import wood.mike.domain.ActivityEntity
-import wood.mike.domain.ActivitySummary
-import wood.mike.domain.AthleteEntity
-import wood.mike.repositories.ActivityRepository
-import wood.mike.repositories.AthleteRepository
-import wood.mike.services.ActivityTransformer
-import wood.mike.services.AthleteTransformer
+import wood.mike.services.ActivityService
+import wood.mike.services.AthleteService
 
 import javax.validation.constraints.NotNull
 import java.time.LocalDateTime
@@ -31,24 +22,15 @@ import java.time.LocalDateTime
 @Controller("/stravaStore")
 class StravaStoreController {
 
-    private static Logger logger = LoggerFactory.getLogger(StravaStoreController.class);
+    private static Logger logger = LoggerFactory.getLogger(StravaStoreController.class)
 
-    private final StravaFetchConfig stravaFetchConfig
-    private final StravaFetchClient stravaFetchClient
-    private final AthleteRepository athleteRepository
-    private final ActivityRepository activityRepository
-    private final ObjectMapper objectMapper
+    private final ActivityService activityService
+    private final AthleteService athleteService
 
-    StravaStoreController(StravaFetchConfig conf,
-                          StravaFetchClient sfc,
-                          AthleteRepository ar,
-                          ActivityRepository actR,
-                          ObjectMapper om) {
-        this.stravaFetchConfig = conf
-        this.stravaFetchClient = sfc
-        this.athleteRepository = ar
-        this.activityRepository = actR
-        this.objectMapper = om
+
+    StravaStoreController(ActivityService acs, AthleteService athleteService) {
+        this.activityService = acs
+        this.athleteService = athleteService
     }
 
     /**
@@ -57,14 +39,7 @@ class StravaStoreController {
     @Get(uri = "/athlete", produces = MediaType.APPLICATION_JSON_STREAM)
     Mono<AthleteDto> fetchAthlete() {
         logger.info("Fetching athlete")
-        Optional<AthleteEntity> athlete = athleteRepository.find()
-        if( athlete.isPresent() ) {
-            return Mono<AthleteDto>.just(AthleteTransformer.from(athlete.get()))
-        }
-        stravaFetchClient.fetchAthlete()
-            .map(AthleteTransformer::to)
-                .map(athleteRepository::persist)
-                    .map ( AthleteTransformer::from )
+        athleteService.fetchAthlete()
     }
 
     /**
@@ -74,14 +49,7 @@ class StravaStoreController {
     @Get(uri = "/activity/{activityId}", produces = MediaType.APPLICATION_JSON_STREAM)
     Flux<ActivityDto> fetchActivity(@PathVariable String activityId) {
         logger.info("Fetching activity ${activityId}")
-        Optional<ActivityEntity> activity = activityRepository.findByStravaActivityId(activityId as Long)
-        if (activity.isPresent()) {
-            logger.info("Activity ${activityId} found in database")
-            return Flux<ActivityDto>.just(ActivityTransformer.from(activity.get()))
-        }
-        stravaFetchClient.fetchActivity(activityId)
-            .map( ActivityTransformer::to )
-                .map( ActivityTransformer::from )
+        activityService.fetchActivity(activityId)
     }
 
     /**
@@ -90,8 +58,7 @@ class StravaStoreController {
     @Get(uri = "/activities", produces = MediaType.APPLICATION_JSON_STREAM)
     Flux<ActivityDto> fetchActivities() {
         logger.info("Fetching all activities")
-        Flux<ActivityDto>.fromIterable(activityRepository.findAll())
-            .map(ActivityTransformer::from)
+        activityService.fetchActivities()
     }
 
     /**
@@ -101,8 +68,7 @@ class StravaStoreController {
     @Get( uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM )
     Flux<ActivityDto> activitiesAfter(@QueryValue @NotNull LocalDateTime after) {
         logger.info("Fetching activities after ${after}")
-        Flux<ActivityDto>.fromIterable( activityRepository.findAllByStartDateAfter( after ) )
-            .map( ActivityTransformer::from )
+        activityService.activitiesAfter(after)
     }
 
     /**
@@ -112,8 +78,7 @@ class StravaStoreController {
     @Get( uri = "/activitiesForSportType", produces = MediaType.APPLICATION_JSON_STREAM )
     Flux<ActivityDto> activitiesForSportType(@QueryValue @NotNull String sportType) {
         logger.info("Fetching activites for sport type ${sportType}")
-        Flux<ActivityDto>.fromIterable( activityRepository.findAllBySportTypeIlike( sportType ) )
-            .map( ActivityTransformer::from )
+        activityService.activitiesForSportType(sportType)
     }
 
     /**
@@ -122,16 +87,7 @@ class StravaStoreController {
      */
     @Get(uri = "/bulkloadactivities/{page}", produces = MediaType.APPLICATION_JSON_STREAM)
     Flux<ActivityDto> bulkLoadActivities(@PathVariable Integer page) {
-        logger.info("Loading page ${page} of activities with max per page of ${stravaFetchConfig.maxPerPage}")
-
-        stravaFetchClient.fetchActivities(page, stravaFetchConfig.maxPerPage)
-                .map( ActivityTransformer::to )
-                .filter(activity -> !activityRepository.findByStravaActivityId(activity.id).isPresent())
-                .map(activityRepository::persist)
-                .map(ActivityTransformer::from)
-                .onErrorContinue(DataAccessException.class, (throwable, o) -> {
-                    logger.error("Error while processing {}. Cause: {}", o, throwable.getMessage())
-                })
+        activityService.bulkLoadActivities(page)
     }
 
     /**
@@ -140,10 +96,7 @@ class StravaStoreController {
      */
     @Get(uri = '/activitySummary/{activityId}', produces = MediaType.TEXT_PLAIN )
     Mono<String> activitySummary( @PathVariable String activityId ) {
-        Mono.justOrEmpty( activityRepository.findByStravaActivityId(activityId as Long) )
-            .flatMap( activity ->
-                    Mono.just( activityMinimal(activity) ) )
-        .switchIfEmpty( Mono.just( "Activity ID ${activityId} not found".toString() ) )
+        activityService.activitySummary( activityId )
     }
 
     /**
@@ -152,10 +105,7 @@ class StravaStoreController {
     @Get(uri = '/latestActivity', produces = MediaType.TEXT_PLAIN )
     Mono<String> latestActivity() {
         logger.info("Getting latest activity")
-        Mono.justOrEmpty( activityRepository.findLatestActivity() )
-                .flatMap( activity ->
-                        Mono.just( activityMinimal( activity ) ) )
-                .switchIfEmpty( Mono.just( "No activities found" ) )
+        activityService.latestActivity()
     }
 
     /**
@@ -164,14 +114,7 @@ class StravaStoreController {
     @Get(uri = '/activityCount', produces = MediaType.TEXT_PLAIN )
     Mono<Long> activityCount() {
         logger.info("Getting activity count")
-        Mono.just(activityRepository.count())
+        activityService.activityCount()
     }
 
-    /**
-     * @param activity  - the activity
-     * @return a summarized version of the activity
-     */
-    String activityMinimal(ActivityEntity activity ) {
-        objectMapper.writeValueAsString( new ActivitySummary(activity) )
-    }
 }

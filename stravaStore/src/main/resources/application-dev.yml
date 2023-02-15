@@ -5,3 +5,9 @@ datasources:
     password: stravastore
     dialect: MYSQL
     driverClassName: com.mysql.cj.jdbc.Driver
+r2dbc:
+  datasources:
+    default:
+      url: r2dbc:mysql://localhost:3306/db
+      username: stravastore
+      password: stravastore

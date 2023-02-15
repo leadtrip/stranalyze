@@ -34,6 +34,9 @@ dependencies {
     compileOnly("io.micronaut.openapi:micronaut-openapi")
     implementation("io.swagger.core.v3:swagger-annotations")
 
+    runtimeOnly("dev.miku:r2dbc-mysql")
+    implementation("io.micronaut.data:micronaut-data-r2dbc")
+
     implementation(project(':common'))
 }
 
