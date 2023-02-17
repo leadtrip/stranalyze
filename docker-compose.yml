@@ -1,0 +1,55 @@
+version: "3.8"
+
+networks:
+  stranalyze:
+    name: stranalyze
+
+services:
+  stravadb:
+    container_name: stravadb
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=stravastore
+      - MYSQL_PASSWORD=stravastore
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - stranalyze
+  strava-fetch:
+    container_name: strava-fetch
+    build:
+      context: /stravaFetch
+      dockerfile: Dockerfile
+    ports:
+      - "10050:10050"
+    networks:
+      - stranalyze
+  strava-view:
+    container_name: strava-view
+    build:
+      context: /stravaView
+      dockerfile: Dockerfile
+    ports:
+      - "10052:10052"
+    networks:
+      - stranalyze
+    environment:
+      STORE_URL: 'http://strava-store:10051/stravaStore'
+  strava-store:
+    container_name: strava-store
+    build:
+      context: /stravaStore
+      dockerfile: Dockerfile
+    depends_on:
+      - stravadb
+    restart: on-failure
+    ports:
+      - "10051:10051"
+    environment:
+      DB_HOST: stravadb
+      DB_PORT: 3306
+      FETCH_URL: 'http://strava-fetch:10050/stravaFetch'
+    networks:
+      - stranalyze

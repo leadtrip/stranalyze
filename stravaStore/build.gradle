@@ -37,7 +37,7 @@ dependencies {
     runtimeOnly("dev.miku:r2dbc-mysql")
     implementation("io.micronaut.data:micronaut-data-r2dbc")
 
-    implementation(project(':common'))
+    implementation(project( path: ':common', configuration: 'default'))
 }
 
 

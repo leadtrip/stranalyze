@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   strava-db:
+    container_name: strava-db-standalone
     image: mysql:8
     ports:
       - "3306:3306"

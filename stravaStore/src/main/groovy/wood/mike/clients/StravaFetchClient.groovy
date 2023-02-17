@@ -11,14 +11,12 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import wood.mike.ActivityDto
 import wood.mike.AthleteDto
-import wood.mike.domain.ActivityEntity
-import wood.mike.domain.AthleteEntity
 
 import javax.validation.constraints.NotNull
 
 import static io.micronaut.http.HttpHeaders.ACCEPT
 
-@Client('http://localhost:10050/stravaFetch')
+@Client( '${strava.fetchUrl}' )
 @Header(name = ACCEPT, value = MediaType.APPLICATION_JSON_STREAM )
 interface StravaFetchClient {
 

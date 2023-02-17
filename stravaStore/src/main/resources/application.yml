@@ -26,6 +26,7 @@ netty:
 strava:
   maxPerPage: 30
   emptyDbMonths: 3
+  fetchUrl: ${FETCH_URL:`http://localhost:10050/stravaFetch`}
 
 # consul does not work with serde right now, see - https://github.com/micronaut-projects/micronaut-discovery-client/issues/385
 #consul:

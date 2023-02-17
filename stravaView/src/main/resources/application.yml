@@ -14,3 +14,6 @@ netty:
   default:
     allocator:
       max-order: 3
+
+strava:
+  storeUrl: ${STORE_URL:`http://localhost:10051/stravaStore`}

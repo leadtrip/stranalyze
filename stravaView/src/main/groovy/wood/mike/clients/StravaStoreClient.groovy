@@ -10,7 +10,7 @@ import wood.mike.ActivityDto
 
 import static io.micronaut.http.HttpHeaders.ACCEPT
 
-@Client('http://localhost:10051/stravaStore')
+@Client('${strava.storeUrl}')
 @Header(name = ACCEPT, value = MediaType.APPLICATION_JSON_STREAM )
 interface StravaStoreClient {
 

@@ -1,6 +1,6 @@
 datasources:
   default:
-    url: jdbc:mysql://localhost:3306/db
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/db?autoReconnect=true
     username: stravastore
     password: stravastore
     dialect: MYSQL
@@ -8,6 +8,6 @@ datasources:
 r2dbc:
   datasources:
     default:
-      url: r2dbc:mysql://localhost:3306/db
+      url: r2dbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/db?autoReconnect=true
       username: stravastore
       password: stravastore
