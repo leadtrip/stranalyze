@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>StrAnalyze - activity</title>
+</head>
+<body>
+
+<section>
+    <div class="container">
+        <form th:object="${activity}">
+            <div th:replace="~{fragments/activity-fragment::activityFrag('name', 'Name', ${activity.name})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('distance', 'Distance', ${activity.distanceKm()})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('moving_time', 'Moving time', ${activity.movingToHoursMinutesSeconds()})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('elapsed_time', 'Elapsed time', ${activity.elapsedToHoursMinutesSeconds()})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('total_elevation_gain', 'Total elevation gain', ${activity.total_elevation_gain})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('sport_type', 'Sport type', ${activity.sport_type})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('start_date', 'Start date', ${activity.start_date})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('timezone', 'Timezone', ${activity.timezone})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('average_speed', 'Average speed', ${activity.average_speed})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('max_speed', 'Max speed', ${activity.max_speed})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('average_cadence', 'Average cadence', ${activity.average_cadence})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('average_watts', 'Average watts', ${activity.average_watts})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('weighted_average_watts', 'Weighted average watts', ${activity.weighted_average_watts})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('kilojoules', 'Kilojoules', ${activity.kilojoules})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('average_heartrate', 'Average heart rate', ${activity.average_heartrate})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('max_heartrate', 'Max heart rate', ${activity.max_heartrate})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('max_watts', 'Max watts', ${activity.max_watts})}"></div>
+            <div th:replace="~{fragments/activity-fragment::activityFrag('suffer_score', 'Suffer score', ${activity.suffer_score})}"></div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

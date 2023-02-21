@@ -10,11 +10,15 @@
     <title th:replace="${title}">Layout Title</title>
 </head>
 <body>
-<h3>StrAnalyze</h3>
-<div th:replace="${content}">
-    <p>Layout content</p>
+
+<nav th:replace="~{fragments/navbar}"></nav>
+
+<div class="container-fluid">
+    <div th:replace="${content}">
+        <p>Layout content</p>
+    </div>
 </div>
-<footer>
+<footer th:replace="~{fragments/footer}">
     Layout footer
 </footer>
 </body>

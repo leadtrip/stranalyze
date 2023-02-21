@@ -29,7 +29,7 @@
             <tr th:each="activity: ${activities}">
                 <td th:text="${activity.id}" />
                 <td th:text="${activity.start_date}" />
-                <td th:text="${#temporals.format(activity.start_date, 'dd-MMM-yyyy hh:mm:ss')}" />
+                <td><a th:href="@{/stravaView/activity/{id}(id=${activity.id})}" th:text="${#temporals.format(activity.start_date, 'dd-MMM-yyyy hh:mm:ss')}"></a></td>
                 <td th:text="${activity.elapsedToHoursMinutesSeconds()}" />
                 <td> <img th:src="@{${'/public/images/' + activity.sport_type + '.svg'}}" > </td>
                 <td th:text="${activity.name}" />
@@ -57,7 +57,8 @@
                         "visible": false,
                         "searchable": false
                     }
-                ]
+                ],
+                "pageLength": 15
             });
         });
     </script>
