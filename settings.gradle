@@ -1,4 +1,4 @@
 rootProject.name = 'stranalyze'
-include 'stravaFetch', 'stravaStore', 'stravaView', 'stravaCli'
+include 'stravaFetch', 'stravaStore', 'stravaView', 'stravaCli', 'strava-react-view'
 include 'common'
 
