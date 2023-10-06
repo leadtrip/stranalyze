@@ -9,6 +9,6 @@ netty:
       max-order: 3
 
 strava:
-  clientId:
-  clientSecret:
-  refreshToken:
+  client-id:
+  client-secret:
+  refresh-token:

@@ -15,8 +15,8 @@ import wood.mike.services.StravaTokenService
 @CompileStatic
 @StravaAuth
 @Singleton
-@Requires(property = "strava.clientId")
-@Requires(property = "strava.clientSecret")
+@Requires(property = "strava.client-id")
+@Requires(property = "strava.client-secret")
 class StravaApiFilter implements HttpClientFilter{
 
     @Inject

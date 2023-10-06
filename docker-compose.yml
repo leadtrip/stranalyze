@@ -20,7 +20,7 @@ services:
   strava-fetch:
     container_name: strava-fetch
     build:
-      context: /stravaFetch
+      context: stravaFetch
       dockerfile: Dockerfile
     ports:
       - "10050:10050"
@@ -29,7 +29,7 @@ services:
   strava-view:
     container_name: strava-view
     build:
-      context: /stravaView
+      context: stravaView
       dockerfile: Dockerfile
     ports:
       - "10052:10052"
@@ -40,7 +40,7 @@ services:
   strava-store:
     container_name: strava-store
     build:
-      context: /stravaStore
+      context: stravaStore
       dockerfile: Dockerfile
     depends_on:
       - stravadb
