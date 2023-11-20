@@ -35,7 +35,7 @@ class StravaStoreController {
     /**
      * Return the athlete from the database if present, otherwise fetch from strava, persist and return
      */
-    @Get(uri = "/athlete", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/athlete", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Mono<AthleteDto> fetchAthlete() {
         logger.info("Fetching athlete")
         athleteService.fetchAthlete()
@@ -45,7 +45,7 @@ class StravaStoreController {
      * Return the given activity from the database if present, otherwise fetch from strava, persist and return
      * @param activityId    - the strava activity ID
      */
-    @Get(uri = "/activity/{activityId}", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/activity/{activityId}", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Flux<ActivityDto> fetchActivity(@PathVariable String activityId) {
         logger.info("Fetching activity ${activityId}")
         activityService.fetchActivity(activityId)
@@ -54,7 +54,7 @@ class StravaStoreController {
     /**
      * @return all activities from the database
      */
-    @Get(uri = "/activities", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/activities", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Flux<ActivityDto> fetchActivities() {
         logger.info("Fetching all activities")
         activityService.fetchActivities()
@@ -64,7 +64,7 @@ class StravaStoreController {
      * @param after - date time to fetch activities after
      * @return activities from the database after the given date time
      */
-    @Get( uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM )
+    @Get( uri = "/activitiesAfter", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON] )
     Flux<ActivityDto> activitiesAfter(@QueryValue @NotNull LocalDateTime after) {
         logger.info("Fetching activities after ${after}")
         activityService.activitiesAfter(after)
@@ -74,7 +74,7 @@ class StravaStoreController {
      * @param sportType - Strava defined sport type
      * @return activities for the given sport type
      */
-    @Get( uri = "/activitiesForSportType", produces = MediaType.APPLICATION_JSON_STREAM )
+    @Get( uri = "/activitiesForSportType", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON] )
     Flux<ActivityDto> activitiesForSportType(@QueryValue @NotNull String sportType) {
         logger.info("Fetching activites for sport type ${sportType}")
         activityService.activitiesForSportType(sportType)
@@ -84,7 +84,7 @@ class StravaStoreController {
      * Fetch activities from strava fetch and persist if not already present
      * @param page  - the page number where 1 is the most recent, used in combination with max per page config setting
      */
-    @Get(uri = "/bulkloadactivities/{page}", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/bulkloadactivities/{page}", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Flux<ActivityDto> bulkLoadActivities(@PathVariable Integer page) {
         activityService.bulkLoadActivities(page)
     }

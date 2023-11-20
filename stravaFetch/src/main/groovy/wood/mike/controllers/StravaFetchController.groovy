@@ -26,25 +26,25 @@ class StravaFetchController {
         this.stravaApiClient = sac
     }
 
-    @Get(uri = "/athlete", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/athlete", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Publisher<AthleteDto> fetchAthlete() {
         logger.info("Fetching athlete")
         stravaApiClient.fetchAthlete()
     }
 
-    @Get(uri = "/activity/{activityId}", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/activity/{activityId}", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Publisher<ActivityDto> fetchActivity(@PathVariable String activityId) {
         logger.info("Fetching activity ${activityId}")
         stravaApiClient.fetchActivity(activityId)
     }
 
-    @Get(uri = "/activities", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/activities", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Publisher<ActivityDto> getActivities(@QueryValue @Nullable Integer page, @QueryValue(value = 'per_page') @Nullable Integer perPage ) {
         logger.info("Fetching activities")
         stravaApiClient.fetchActivities(page, perPage)
     }
 
-    @Get(uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM)
+    @Get(uri = "/activitiesAfter", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON])
     Publisher<ActivityDto> activitiesAfter(@QueryValue @Nullable Long after ) {
         logger.info("Fetching activities after ${after}")
         stravaApiClient.activitesAfter( after )

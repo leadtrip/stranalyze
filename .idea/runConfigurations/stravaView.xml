@@ -1,15 +1,14 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="stravaView" type="MicronautRunConfigurationType" factoryName="Micronaut">
-    <module name="stranalyze.stravaView.main" />
-    <option name="alternativeJrePath" />
+    <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.sdkman/candidates/java/17.0.7-amzn" />
+    <option name="MAIN_CLASS_NAME" value="wood.mike.Application" />
+    <module name="wood.mike.stranalyze.stravaView.main" />
+    <option name="shortenCommandLine" value="NONE" />
+    <option name="alternativeJrePath" value="$USER_HOME$/.sdkman/candidates/java/17.0.7-amzn" />
     <option name="alternativeJrePathEnabled" value="false" />
-    <option name="includeProvidedScope" value="true" />
     <option name="mainClass" value="wood.mike.Application" />
     <option name="passParentEnvs" value="true" />
-    <option name="programParameters" value="" />
-    <option name="shortenCommandLine" value="NONE" />
-    <option name="vmParameters" value="" />
-    <option name="workingDirectory" value="" />
+    <option name="vmParameters" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

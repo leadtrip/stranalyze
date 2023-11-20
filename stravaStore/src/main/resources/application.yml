@@ -3,6 +3,8 @@ micronaut:
     name: stravastore
   server:
     port: 10051
+    cors:
+      enabled: true
   router:
     static-resources:
       swagger:

@@ -29,6 +29,6 @@ interface StravaFetchClient {
     @Get('/activities')
     Flux<ActivityDto> fetchActivities(@QueryValue @Nullable Integer page, @QueryValue(value = 'per_page') @Nullable Integer perPage )
 
-    @Get( uri = "/activitiesAfter", produces = MediaType.APPLICATION_JSON_STREAM )
+    @Get( uri = "/activitiesAfter", produces = [MediaType.APPLICATION_JSON_STREAM, MediaType.APPLICATION_JSON] )
     Flux<ActivityDto> activitiesAfter(@QueryValue @NotNull  Long after )
 }

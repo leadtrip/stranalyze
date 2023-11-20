@@ -3,6 +3,8 @@ micronaut:
     name: stravaView
   server:
     port: 10052
+    cors:
+      enabled: true
   router:
     static-resources:
       default:

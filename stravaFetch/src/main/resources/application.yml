@@ -3,6 +3,8 @@ micronaut:
     name: stravaFetch
   server:
     port: 10050
+    cors:
+      enabled: true
 netty:
   default:
     allocator:
