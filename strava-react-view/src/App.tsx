@@ -3,12 +3,13 @@ import Container from "react-bootstrap/Container";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Activities from "./Activities";
 import {ActivityDetail} from "./ActivityDetail";
+import Header from "./Header";
 
 function App() {
   return (
     <Container className="p-3">
       <Container className="p-5 mb-4 bg-light rounded-3">
-          <h1 className="header">stranalyze</h1>
+          <Header />
           <BrowserRouter>
               <Routes>
                   <Route path="/" element={<Activities />} />
