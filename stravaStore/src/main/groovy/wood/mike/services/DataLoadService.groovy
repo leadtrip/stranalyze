@@ -33,11 +33,8 @@ class DataLoadService {
     void loadLatestActivites() {
         log.info("Loading latest activities")
 
-        Optional<Long> maxId = activityRepository.findMaxId()
-
-        LocalDateTime lastActivityStart = maxId.isPresent()
-                ? activityRepository.findByStravaActivityId( maxId.get() ).get().startDate
-                : LocalDateTime.now().minusMonths(stravaFetchConfig.emptyDbMonths)
+        LocalDateTime lastActivityStart =
+                activityRepository.findMaxStartDate().orElse(LocalDateTime.now().minusMonths(stravaFetchConfig.emptyDbMonths))
 
         log.info("Polling for activites created after ${lastActivityStart}")
 
@@ -48,14 +45,14 @@ class DataLoadService {
         log.info("Got ${activities.size()} activities")
 
         activities
-            .findAll{ activity -> !activityRepository.findByStravaActivityId(activity.id).isPresent() }
-            .each {activity ->
-                log.info("Adding activity " + activity.id);
-                activityRepository.persist(ActivityTransformer.to(activity))
+                .findAll{ activity -> !activityRepository.findByStravaActivityId(activity.id).isPresent() }
+                .each {activity ->
+                    log.info("Adding activity " + activity.id);
+                    activityRepository.persist(ActivityTransformer.to(activity))
             }
 
         // Load an empty database with some activities and top up until latest is present
-        if (!maxId.isPresent() || activities.size() >= stravaFetchConfig.maxPerPage) {
+        if ( activities.size() >= stravaFetchConfig.maxPerPage) {
             loadLatestActivites()
         }
     }

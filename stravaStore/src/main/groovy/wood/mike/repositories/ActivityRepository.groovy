@@ -21,6 +21,8 @@ interface ActivityRepository extends CrudRepository<ActivityEntity, Long> {
 
     Optional<Long> findMaxId()
 
+    Optional<LocalDateTime> findMaxStartDate()
+
     @Query('select * from activity where strava_activity_id = (select max(strava_activity_id) from activity)')
     Optional<ActivityEntity> findLatestActivity()
 }
